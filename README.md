@@ -1,6 +1,6 @@
-# ArsenanZZ Learning Hub
+# ZZ
 
-This repository is the unified website for four learning collections:
+This repository is the unified ZZ website for four learning collections:
 
 - WQA
 - Reading
