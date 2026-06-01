@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArsenanZZ Learning Hub</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #1f2528;
+    --muted: #5f6d73;
+    --line: #d7dfdf;
+    --paper: #f4f7f5;
+    --panel: #ffffff;
+    --green: #24745f;
+    --red: #8d3f3f;
+    --gold: #b87808;
+    --blue: #0d7f98;
+    --shadow: 0 22px 54px -42px rgba(20, 35, 42, .65);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 64px;
+    padding: 12px clamp(18px, 4vw, 48px);
+    background: rgba(244, 247, 245, .92);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+  }
+
+  .brand {
+    display: grid;
+    gap: 2px;
+  }
+
+  .brand strong {
+    font-size: 17px;
+    letter-spacing: 0;
+  }
+
+  .brand span {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--muted);
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  main {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 34px 0 54px;
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: end;
+    margin-bottom: 22px;
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: 64px;
+    line-height: .98;
+    letter-spacing: 0;
+  }
+
+  .intro p {
+    max-width: 690px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .counter {
+    min-width: 150px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: var(--shadow);
+  }
+
+  .counter b {
+    display: block;
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .counter span {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .project {
+    display: grid;
+    grid-template-columns: minmax(220px, 42%) minmax(0, 1fr);
+    min-height: 300px;
+    overflow: hidden;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .project img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    background: #e7efef;
+  }
+
+  .project-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 26px;
+    padding: 4px 9px;
+    color: #ffffff;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .wqa .eyebrow { background: var(--green); }
+  .reading .eyebrow { background: var(--red); }
+  .run50 .eyebrow { background: var(--gold); }
+  .ro .eyebrow { background: var(--blue); }
+
+  h2 {
+    margin: 0;
+    font-size: 25px;
+    line-height: 1.18;
+    letter-spacing: 0;
+  }
+
+  .project-body p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .links {
+    display: grid;
+    gap: 7px;
+    margin-top: auto;
+  }
+
+  .links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 38px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    background: #fbfcfc;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .links a::after {
+    content: "Open";
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .links a:hover,
+  .links a:focus-visible,
+  .nav a:hover,
+  .nav a:focus-visible {
+    border-color: currentColor;
+    outline: none;
+  }
+
+  .repo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .repo-row a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--muted);
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  @media (max-width: 980px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .topbar,
+    .intro {
+      align-items: start;
+      grid-template-columns: 1fr;
+    }
+
+    .topbar {
+      position: static;
+      display: grid;
+    }
+
+    .nav {
+      justify-content: start;
+    }
+
+    .project {
+      grid-template-columns: 1fr;
+    }
+
+    .project img {
+      min-height: 210px;
+      aspect-ratio: 16 / 9;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    h1 {
+      font-size: 34px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <strong>ArsenanZZ Learning Hub</strong>
+    <span>WQA / Reading / Run50 / RO</span>
+  </div>
+  <nav class="nav" aria-label="Sections">
+    <a href="#wqa">WQA</a>
+    <a href="#reading">Reading</a>
+    <a href="#run50">Run50</a>
+    <a href="#ro">RO</a>
+  </nav>
+</header>
+
+<main>
+  <section class="intro" aria-labelledby="page-title">
+    <div>
+      <h1 id="page-title">All studies in one place.</h1>
+      <p>把水处理研究、读书卡片、跑步计划和 RO 学习资料集中到一个入口页。每个模块都保留原来的 HTML 页面，直接打开就能看。</p>
+    </div>
+    <div class="counter" aria-label="Site page count">
+      <b>12</b>
+      <span>HTML pages</span>
+    </div>
+  </section>
+
+  <section class="project-grid" aria-label="Learning collections">
+    <article class="project wqa" id="wqa">
+      <img src="assets/wqa.png" alt="WQA report cover">
+      <div class="project-body">
+        <span class="eyebrow">WQA</span>
+        <h2>Water quality research and WQA 2026</h2>
+        <p>会议观察、演讲总结，以及 EZsalt、DROP 两份产品研究报告。</p>
+        <div class="links">
+          <a href="wqa/WQA_2026_Presentations_Summary-V2.html">WQA 2026 Presentation Summaries</a>
+          <a href="wqa/WQA_2026_Expo_Observation_Report_EN.html">WQA 2026 Expo Observation Report</a>
+          <a href="wqa/EZsalt_Research_Report_2_EN.html">EZsalt Research Report</a>
+          <a href="wqa/DROP_Research_Report_EN.html">DROP Research Report</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project reading" id="reading">
+      <img src="assets/reading.png" alt="Reading card cover">
+      <div class="project-body">
+        <span class="eyebrow">Reading</span>
+        <h2>Atomic Habits reading cards</h2>
+        <p>《Atomic Habits》速读卡片和章节式学习页面。</p>
+        <div class="links">
+          <a href="reading/index.html">Reading Home</a>
+          <a href="reading/atomic-habits-bloom-cards.html">Atomic Habits Bloom Cards</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project run50" id="run50">
+      <img src="assets/run50.png" alt="Run50 training cover">
+      <div class="project-body">
+        <span class="eyebrow">Run50</span>
+        <h2>Running plan and personal space</h2>
+        <p>Run50 训练页面，以及与阅读学习相关的个人资料页。</p>
+        <div class="links">
+          <a href="run50/index.html">Run50 Home</a>
+          <a href="run50/run50.html">Run50 Training Page</a>
+          <a href="run50/atomic-habits-full-english.html">Atomic Habits Full English</a>
+          <a href="run50/atomic-habits-bloom-cards.html">Atomic Habits Bloom Cards</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project ro" id="ro">
+      <img src="assets/ro.png" alt="RO system cover">
+      <div class="project-body">
+        <span class="eyebrow">RO</span>
+        <h2>Reverse osmosis learning guide</h2>
+        <p>RO 系统工作原理、关键部件、运行逻辑和完整学习指南。</p>
+        <div class="links">
+          <a href="ro/ro-system-explained.html">How a Reverse Osmosis System Works</a>
+          <a href="ro/RO-Complete-Guide-EN.html">RO Complete Guide EN</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="repo-row" aria-label="Source repositories">
+    <a href="https://github.com/ArsenanZZ/WQA">GitHub WQA</a>
+    <a href="https://github.com/ArsenanZZ/Reading">GitHub Reading</a>
+    <a href="https://github.com/ArsenanZZ/Run50">GitHub Run50</a>
+    <a href="https://github.com/ArsenanZZ/RO">GitHub RO</a>
+  </section>
+</main>
+</body>
+</html>
